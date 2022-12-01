@@ -10,8 +10,8 @@ export const App = () => {
     <div>
       <PageTitle title={"This is component"} />
       <Rating rating={4}/>
-      <Accordion title={"Menu"} collapsed={false} />
-      <Accordion title={"Navigation"} collapsed={true} />
+      <Accordion title={"Menu"} collapsed={true} />
+      <Accordion title={"Navigation"} collapsed={false} />
       <Rating rating={2}/>
     </div>
   );
