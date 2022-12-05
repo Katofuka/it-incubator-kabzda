@@ -1,33 +1,43 @@
+import { useState } from "react";
 type RatingType = {
     rating: 0 | 1 | 2 | 3 | 4 | 5;
 }
 
 export const SelfControlledRating = (props: RatingType) => {
     const rating = props.rating
+    const [star, setStar] = useState<Array<boolean>>([false, false, false, false, false,])   
+    
+    const stars = star.map((item, key) => {        
+        return(
+            <Star id={key+1} setStar={setStar} star={star} selected={item} />
+        )
+    })
+
     return (
         <div>
-            <Star id={1} selected={rating > 0}/>
-            <Star id={2} selected={rating > 1}/>
-            <Star id={3} selected={rating > 2}/>
-            <Star id={4} selected={rating > 3}/>
-            <Star id={5} selected={rating > 4}/>
+            {stars}
         </div>
     )
 }
 
 type StarType = {
-    selected: boolean;
-    id: 1 | 2 | 3 | 4 | 5;
+    setStar: ((star: Array<boolean>) => void)
+    star: Array<boolean>
+    id: number
+    selected: boolean
 }
 
 function Star(props: StarType) {
+    const { star, setStar, id, selected } = props
 
-    const {selected, id} = props
+    const onClickButtonHandler = () => {
+        setStar(star.map((item, key) => key < id ? true : false))
+    }
+
     return (
         selected ?
-            <span onClick={() => {console.log(id)}}>
-            <b>Star </b>
-        </span> :
-            <span onClick={() => {console.log(id)}}>Star </span>
+            <span onClick={onClickButtonHandler}>★ </span>
+            :
+            <span onClick={onClickButtonHandler}>☆ </span>
     )
 }
