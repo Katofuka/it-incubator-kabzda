@@ -1,23 +1,31 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {Accordion} from './components/Accordion/Accordion';
-import {Rating} from './components/Accordion/Rating';
+import {Rating, RatingValueType} from './components/Accordion/Rating';
 import {PageTitle} from './components/Accordion/PageTitle';
 
 import './App.css';
 import {OnOff} from "./components/OnOff/OnOff";
 import {SelfControlledAccordion} from "./components/SelfControlledAccordion/SelfControlledAccordion";
-import {SelfControlledRating} from "./components/SelfControlledAccordion/SelfControlledRating";
+import {SelfControlledRating} from "./components/SelfControlledRating/SelfControlledRating";
+import {SelfControlledOnOff} from "./components/SelfControlledOnOff/SelfControlledOnOff";
 
 export const App = () => {
+    const [ratingValue, setRatingValue] = useState<RatingValueType>(0)
+    const [accordionCollapsed, setAccordionCollapsed] = useState<boolean>(false)
+    const [valueOnOff, setOnOff] = useState<boolean>(false)
+
     return (
-        <div>
-            <OnOff on={false}/>
-            <OnOff on={true}/>
-            <PageTitle title={"This is component"}/>
+        <div className={'app'}>
+
+            <PageTitle title={"This is uncontrolled components"}/>
+            <SelfControlledOnOff defaultValue={true}/>
             <SelfControlledAccordion title={"Menu"}/>
-            <SelfControlledRating rating={4}/>
-            <SelfControlledAccordion title={"Navigation"}/>
-            <SelfControlledRating rating={2}/>
+            <SelfControlledRating onChange={()=>5}/>
+
+            <PageTitle title={"This is controlled components"}/>
+            <OnOff value={valueOnOff} onClick={setOnOff}/>
+            <Accordion title={"Navigation"} onClick={()=>setAccordionCollapsed(!accordionCollapsed)} collapsed={accordionCollapsed}/>
+            <Rating rating={ratingValue} onClick={setRatingValue}/>
         </div>
     );
 }

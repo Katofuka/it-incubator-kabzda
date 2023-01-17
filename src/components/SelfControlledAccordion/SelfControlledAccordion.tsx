@@ -12,7 +12,7 @@ export const SelfControlledAccordion = (props: SCAccordionType) => {
 
      return (
         <div>
-            <AccordionTitle title={title} setCollapsed={setCollapsed} collapsed={collapsed}/>
+            <AccordionTitle title={title} setCollapsed={()=>setCollapsed(!collapsed)} collapsed={collapsed}/>
             {collapsed && <AccordionBody/>}
         </div>
 
@@ -21,15 +21,15 @@ export const SelfControlledAccordion = (props: SCAccordionType) => {
 
 type AccordionTitleType = {
     title: string
-    setCollapsed: (collapsed: boolean) => void
+    setCollapsed: () => void
     collapsed: boolean
 }
 
 const AccordionTitle = (props: AccordionTitleType) => {
-    const {title, setCollapsed, collapsed} = props
+    const {title, setCollapsed} = props
 
     return (
-        <h3 onClick={()=>{setCollapsed(!collapsed)}}>{title}</h3>
+        <h3 onClick={()=>{setCollapsed()}}>{title}</h3>
     )
 }
 
