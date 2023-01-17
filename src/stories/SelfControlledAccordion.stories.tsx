@@ -1,19 +1,26 @@
 import React from 'react';
+import {
+    SelfControlledAccordion,
+    SelfControlledAccordionPropsType
+} from "../components/SelfControlledAccordion/SelfControlledAccordion";
+import {getCategoryObj} from "../common/categoryName";
+import {Story} from "@storybook/react";
 
-import {SelfControlledAccordion} from "../components/SelfControlledAccordion/SelfControlledAccordion";
 
 
 export default {
-    title: 'SelfControlledAccordion',
+    title: 'Components/Uncontrolled/SelfControlledAccordion',
     component: SelfControlledAccordion,
+    argTypes: {
+        title: {...getCategoryObj('Main')},
+    }
 }
 
+const Template: Story<SelfControlledAccordionPropsType> = (args) => <SelfControlledAccordion {...args}/>
 
-// export const EmptyStars = () => <Rating rating={1} onClick={x => x}/>;
-// export const CollapsedMode = () => <SelfControlledAccordion title={"Menu"}/>;
-
-
-
-export const AccordionChanging = () => <SelfControlledAccordion title={"Menu"}/>
+export const AccordionChanging = Template.bind({})
+AccordionChanging.args = {
+    title: "Collapsed",
+}
 
 

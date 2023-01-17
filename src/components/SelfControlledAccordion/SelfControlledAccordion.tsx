@@ -1,10 +1,10 @@
 import {useState} from "react";
 
-type SCAccordionType = {
+export type SelfControlledAccordionPropsType = {
     title: string
 }
 
-export const SelfControlledAccordion = (props: SCAccordionType) => {
+export const SelfControlledAccordion = (props: SelfControlledAccordionPropsType) => {
     const [collapsed, setCollapsed] = useState<boolean>(false)
     const {
         title,

@@ -1,9 +1,9 @@
 
-type OnOffType={
+export type OnOffPropsType={
     value: boolean
     onClick: (value:boolean)=>void
 }
-export const OnOff = (props: OnOffType) => {
+export const OnOff = (props: OnOffPropsType) => {
     const {value, onClick} = props
     const blockStyle = {
         display: "flex",

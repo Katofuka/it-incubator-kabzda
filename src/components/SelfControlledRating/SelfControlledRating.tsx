@@ -1,12 +1,17 @@
-import {useState} from "react";
+import React, {useState} from "react";
+import {RatingValueType} from "../Accordion/Rating";
+import {Story} from "@storybook/react";
+import {
+    SelfControlledAccordion,
+    SelfControlledAccordionPropsType
+} from "../SelfControlledAccordion/SelfControlledAccordion";
 
-type RatingValueType = 0 | 1 | 2 | 3 | 4 | 5;
-type SelfControlledType = {
+export type SelfControlledPropsType = {
     defaultValue?: RatingValueType
     onChange: (value: RatingValueType) => void
 }
 
-export const SelfControlledRating: React.FC<SelfControlledType> = ({defaultValue, onChange}) => {
+export const SelfControlledRating: React.FC<SelfControlledPropsType> = ({defaultValue, onChange}) => {
 
     const [star, setStar] = useState<RatingValueType>(defaultValue ? defaultValue : 0)
     return (<div>
@@ -46,4 +51,12 @@ function Star(props: StarType) {
     return (
         <span onClick={setStar}>{selected ? '★' : '☆'}</span>
     )
+}
+
+
+const Template: Story<SelfControlledAccordionPropsType> = (args) => <SelfControlledAccordion {...args}/>
+
+export const AccordionChanging = Template.bind({})
+AccordionChanging.args = {
+    title: "Collapsed",
 }
