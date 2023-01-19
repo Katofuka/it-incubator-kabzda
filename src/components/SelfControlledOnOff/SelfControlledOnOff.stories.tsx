@@ -1,6 +1,6 @@
 import React from 'react';
-import {SelfControlledOnOff} from "../components/SelfControlledOnOff/SelfControlledOnOff";
-import {getCategoryObj} from "../common/categoryName";
+import {SelfControlledOnOff} from "./SelfControlledOnOff";
+import {getCategoryObj} from "../../common/categoryName";
 import {Story} from "@storybook/react";
 
 export default {

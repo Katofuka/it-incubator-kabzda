@@ -1,7 +1,7 @@
 import React, {useState} from "react";
-import {OnOff, OnOffPropsType} from "../components/OnOff/OnOff";
+import {OnOff, OnOffPropsType} from "./OnOff";
 import {action} from "@storybook/addon-actions";
-import {getCategoryObj} from "../common/categoryName";
+import {getCategoryObj} from "../../common/categoryName";
 import {Story} from "@storybook/react";
 
 

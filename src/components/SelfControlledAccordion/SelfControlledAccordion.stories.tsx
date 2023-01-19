@@ -2,8 +2,8 @@ import React from 'react';
 import {
     SelfControlledAccordion,
     SelfControlledAccordionPropsType
-} from "../components/SelfControlledAccordion/SelfControlledAccordion";
-import {getCategoryObj} from "../common/categoryName";
+} from "./SelfControlledAccordion";
+import {getCategoryObj} from "../../common/categoryName";
 import {Story} from "@storybook/react";
 
 

@@ -1,8 +1,8 @@
-import {Rating, RatingPropsType, RatingValueType} from "../components/Accordion/Rating";
+import {Rating, RatingPropsType, RatingValueType} from "./Rating";
 import React, {useState} from "react";
 import {action} from "@storybook/addon-actions";
 import {Story} from "@storybook/react";
-import {getCategoryObj} from "../common/categoryName";
+import {getCategoryObj} from "../../common/categoryName";
 
 export default {
     title: 'Components/Controlled/Rating',

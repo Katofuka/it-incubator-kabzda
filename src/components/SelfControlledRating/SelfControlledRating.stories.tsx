@@ -1,8 +1,8 @@
 import React from 'react';
-import {SelfControlledPropsType, SelfControlledRating} from "../components/SelfControlledRating/SelfControlledRating";
+import {SelfControlledPropsType, SelfControlledRating} from "./SelfControlledRating";
 import {action} from "@storybook/addon-actions";
-import {getCategoryObj} from "../common/categoryName";
 import {Story} from "@storybook/react";
+import {getCategoryObj} from "../../common/categoryName";
 
 
 export default {

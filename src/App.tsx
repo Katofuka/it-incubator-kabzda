@@ -8,12 +8,24 @@ import {OnOff} from "./components/OnOff/OnOff";
 import {SelfControlledAccordion} from "./components/SelfControlledAccordion/SelfControlledAccordion";
 import {SelfControlledRating} from "./components/SelfControlledRating/SelfControlledRating";
 import {SelfControlledOnOff} from "./components/SelfControlledOnOff/SelfControlledOnOff";
+import {SelectComponent} from "./components/Select/Select";
+
 
 export const App = () => {
     const [ratingValue, setRatingValue] = useState<RatingValueType>(0)
     const [accordionCollapsed, setAccordionCollapsed] = useState<boolean>(false)
     const [valueOnOff, setOnOff] = useState<boolean>(false)
+    const [title, setTitle] = useState("")
 
+    const users = [
+        {title:"Lale", value:"eq"},
+        {title:"Ukkaa", value:"das"},
+        {title:"Opead", value:"das"},
+        {title:"Beeelo", value:"das"},
+        {title:"Jeel", value:"das"},
+    ]
+
+    const onChange = (value: any) => setTitle(value)
     return (
         <div className={'app'}>
 
@@ -24,8 +36,16 @@ export const App = () => {
 
             <PageTitle title={"This is controlled components"}/>
             <OnOff value={valueOnOff} onClick={setOnOff}/>
-            <Accordion title={"Navigation"} onClick={()=>setAccordionCollapsed(!accordionCollapsed)} collapsed={accordionCollapsed}/>
+            <Accordion title={"Navigation"}
+                       onClick={()=>setAccordionCollapsed(!accordionCollapsed)}
+                       collapsed={accordionCollapsed }
+                       items={users}
+                       onClickItems={x=>x}
+            />
             <Rating rating={ratingValue} onClick={setRatingValue}/>
+
+            <SelectComponent value={title} onChange={onChange}  items={users}/>
         </div>
     );
 }
+
