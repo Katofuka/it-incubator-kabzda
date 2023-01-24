@@ -1,19 +1,22 @@
-import {useState} from "react";
+import {useReducer} from "react";
+import {reducer} from "./Reducer";
 
 export type SelfControlledAccordionPropsType = {
     title: string
 }
 
+
 export const SelfControlledAccordion = (props: SelfControlledAccordionPropsType) => {
-    const [collapsed, setCollapsed] = useState<boolean>(false)
+   //const [collapsed, setCollapsed] = useState<boolean>(false)
+    const [state, dispatch] = useReducer(reducer, {collapsed: false})
     const {
         title,
     } = props
 
      return (
         <div>
-            <AccordionTitle title={title} setCollapsed={()=>setCollapsed(!collapsed)} collapsed={collapsed}/>
-            {collapsed && <AccordionBody/>}
+            <AccordionTitle title={title} setCollapsed={()=>dispatch({type: 'TOOGLE_COLLAPSED'})} collapsed={state.collapsed}/>
+            {state.collapsed && <AccordionBody/>}
         </div>
 
     )
