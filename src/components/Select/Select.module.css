@@ -1,0 +1,19 @@
+.select .main{
+    border: 1px solid black;
+    width: 100px;
+    display: inline-block;
+    min-height: 20px;
+}
+
+
+
+.itemGroup{
+    position: absolute;
+    width: 100px;
+    padding: 10px 5px;
+}
+
+.item.selected {
+    background-color: rgba(222, 212, 212, 0.24);
+
+}

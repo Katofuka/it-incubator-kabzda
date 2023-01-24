@@ -1,6 +1,5 @@
-import React from "react";
-import Select from "@mui/material/Select/Select";
-import {FormControl, InputLabel, MenuItem} from "@mui/material";
+import React, {KeyboardEvent, useEffect, useState} from "react";
+import styles from "./Select.module.css";
 
 
 type ItemType = {
@@ -9,26 +8,68 @@ type ItemType = {
 }
 
 type SelectPropsType = {
-    value: any
+    value?: any
     onChange: (value: any) => void
-    items: ItemType[]
+    items: ItemType[];
 }
 
 export const SelectComponent = (props: SelectPropsType) => {
-    return (
-        <FormControl variant="standard" sx={{m: 1, minWidth: 240, height: 30}}>
-            <InputLabel id="demo-simple-select-label">Users</InputLabel>
-            <Select value={props.value}>
-                <MenuItem value={props.value} onClick={()=>props.onChange('')}>
-                    <em>None</em>
-                </MenuItem>
-                {props.items.map((i, key) =>
-                    <MenuItem key={key} value={i.title} onClick={()=>props.onChange(i.title)}>
-                        <em>{i.title}</em>
-                    </MenuItem>
-                )}
-            </Select>
+    const [active, setActive] = useState<boolean>(false)
+    const [hoveredElement, setHoveredElement] = useState(props.value)
 
-        </FormControl>
+    const selectedItem = props.items.find(i => i.value === props.value)
+    const hoveredItem = props.items.find(i => i.value === hoveredElement)
+
+    const toggleItems = () => setActive(!active)
+    const onItemClick = (value: any) => {
+        props.onChange(value);
+        toggleItems()
+    }
+
+    useEffect(() => setHoveredElement(props.value), [props.value])
+
+    const onKeyUp = (e: KeyboardEvent<HTMLDivElement>) => {
+        if (e.code === "ArrowUp" || e.code === "ArrowDown") {
+            for (let i = 0; i < props.items.length; i++) {
+                if (hoveredElement === props.items[i].value) {
+                    const pretendentValue = e.code === "ArrowDown"
+                        ? props.items[i + 1]
+                        : props.items[i - 1];
+                    if (pretendentValue) {
+                        props.onChange(pretendentValue.value);
+                        return;
+                    }
+                }
+            }
+            if (!hoveredElement)
+                props.onChange(props.items[0].value)
+
+        }
+        if (e.code === "Escape" || e.code === "Enter") {
+            setActive(false)
+        }
+
+    }
+
+    return (
+
+        <div onKeyUp={onKeyUp} className={styles.select} tabIndex={0}>
+
+            <span className={styles.main} onClick={toggleItems} >{selectedItem && selectedItem.title}</span>
+            {
+                active && <div className={styles.itemGroup}>
+                    {props.items
+                        .map(i =>
+                            <div className={styles.item + " " + (hoveredItem === i ? styles.selected : "")}
+                                 key={i.value}
+                                 onMouseEnter={() => setHoveredElement(i.value)}
+                                 onClick={() => onItemClick(i.value)}>
+                                {i.title}
+                            </div>)}
+                </div>
+            }
+        </div>
+
+
     )
 }

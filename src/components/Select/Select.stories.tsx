@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useState} from 'react';
+import React, {useState} from 'react';
 
 import {SelectComponent} from "./Select";
 
@@ -8,21 +8,30 @@ export default {
 
 }
 const users = [
-    {title:"Lale", value:"eq"},
-    {title:"Ukkaa", value:"das"},
-    {title:"Opead", value:"das"},
-    {title:"Beeelo", value:"das"},
-    {title:"Jeel", value:"das"},
+    {title: "Lale", value: "1"},
+    {title: "Ukkaa", value: "2"},
+    {title: "Opead", value: "3"},
+    {title: "Beeelo", value: "4"},
+    {title: "Jeel", value: "5"},
 ]
 
-export const ControlledSelect = () => {
-    const [parentValue, setParenValue] = useState<string>("0")
-    const onChange = (e: ChangeEvent<HTMLSelectElement> ) => {
-        setParenValue(e.currentTarget.value)
-    }
-    return<>
-        <SelectComponent value={parentValue} onChange={ onChange} items={users} />
+export const WithValue = () => {
+    const [parentValue, setParenValue] = useState<string>("1")
+
+    return <>
+        <SelectComponent value={parentValue} items={users} onChange={setParenValue}/>
 
     </>
 }
+
+export const WithoutValue = () => {
+    const [parentValue, setParenValue] = useState<string>("1")
+
+
+    return <>
+        <SelectComponent value={null} items={users} onChange={setParenValue}/>
+
+    </>
+}
+
 
