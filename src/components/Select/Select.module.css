@@ -3,6 +3,7 @@
     width: 100px;
     display: inline-block;
     min-height: 20px;
+    margin: 0 20px
 }
 
 
@@ -16,4 +17,9 @@
 .item.selected {
     background-color: rgba(222, 212, 212, 0.24);
 
+}
+
+.inputBlock {
+    display: flex;
+    flex-direction: row;
 }

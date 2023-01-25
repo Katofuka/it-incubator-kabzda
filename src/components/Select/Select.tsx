@@ -1,5 +1,6 @@
-import React, {KeyboardEvent, useEffect, useState} from "react";
+import React, {KeyboardEvent, memo, useCallback, useEffect, useMemo, useState} from "react";
 import styles from "./Select.module.css";
+import {CityType} from "./Select.stories";
 
 
 type ItemType = {
@@ -10,15 +11,18 @@ type ItemType = {
 type SelectPropsType = {
     value?: any
     onChange: (value: any) => void
-    items: ItemType[];
+    items: CityType[];
+    filter?: (state: CityType[]) => CityType[]
 }
 
-export const SelectComponent = (props: SelectPropsType) => {
+export const SelectComponent = memo((props: SelectPropsType) => {
     const [active, setActive] = useState<boolean>(false)
     const [hoveredElement, setHoveredElement] = useState(props.value)
 
-    const selectedItem = props.items.find(i => i.value === props.value)
-    const hoveredItem = props.items.find(i => i.value === hoveredElement)
+    const newItems = props.filter ? props.filter(props.items) : props.items
+
+    const selectedItem = newItems.find(i => i.value === props.value)
+    const hoveredItem = newItems.find(i => i.value === hoveredElement)
 
     const toggleItems = () => setActive(!active)
     const onItemClick = (value: any) => {
@@ -30,11 +34,11 @@ export const SelectComponent = (props: SelectPropsType) => {
 
     const onKeyUp = (e: KeyboardEvent<HTMLDivElement>) => {
         if (e.code === "ArrowUp" || e.code === "ArrowDown") {
-            for (let i = 0; i < props.items.length; i++) {
-                if (hoveredElement === props.items[i].value) {
+            for (let i = 0; i < newItems.length; i++) {
+                if (hoveredElement === newItems[i].value) {
                     const pretendentValue = e.code === "ArrowDown"
-                        ? props.items[i + 1]
-                        : props.items[i - 1];
+                        ? newItems[i + 1]
+                        : newItems[i - 1];
                     if (pretendentValue) {
                         props.onChange(pretendentValue.value);
                         return;
@@ -42,7 +46,7 @@ export const SelectComponent = (props: SelectPropsType) => {
                 }
             }
             if (!hoveredElement)
-                props.onChange(props.items[0].value)
+                props.onChange(newItems[0].value)
 
         }
         if (e.code === "Escape" || e.code === "Enter") {
@@ -51,14 +55,15 @@ export const SelectComponent = (props: SelectPropsType) => {
 
     }
 
+
     return (
 
         <div onKeyUp={onKeyUp} className={styles.select} tabIndex={0}>
 
-            <span className={styles.main} onClick={toggleItems} >{selectedItem && selectedItem.title}</span>
+            <span className={styles.main} onClick={toggleItems}>{selectedItem && selectedItem.title}</span>
             {
                 active && <div className={styles.itemGroup}>
-                    {props.items
+                    {newItems
                         .map(i =>
                             <div className={styles.item + " " + (hoveredItem === i ? styles.selected : "")}
                                  key={i.value}
@@ -72,4 +77,4 @@ export const SelectComponent = (props: SelectPropsType) => {
 
 
     )
-}
+})

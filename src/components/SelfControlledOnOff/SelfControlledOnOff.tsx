@@ -1,10 +1,10 @@
-import {useState} from "react";
+import {memo, useState} from "react";
 //
 // type SelfControlledOnOffType = {
 //     defaultValue? : boolean
 // }
 
-export const SelfControlledOnOff = ({defaultValue}: {defaultValue?: boolean}) => {
+export const SelfControlledOnOff = memo(({defaultValue}: {defaultValue?: boolean}) => {
 
     const [on, setOn] = useState<boolean>(defaultValue ? defaultValue: false)
 
@@ -46,4 +46,4 @@ export const SelfControlledOnOff = ({defaultValue}: {defaultValue?: boolean}) =>
         </div>
 
     )
-}
+})

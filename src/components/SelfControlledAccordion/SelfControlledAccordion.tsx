@@ -1,4 +1,4 @@
-import {useReducer} from "react";
+import {memo, useReducer} from "react";
 import {reducer} from "./Reducer";
 
 export type SelfControlledAccordionPropsType = {
@@ -28,15 +28,15 @@ type AccordionTitleType = {
     collapsed: boolean
 }
 
-const AccordionTitle = (props: AccordionTitleType) => {
+const AccordionTitle = memo((props: AccordionTitleType) => {
     const {title, setCollapsed} = props
 
     return (
         <h3 onClick={()=>{setCollapsed()}}>{title}</h3>
     )
-}
+})
 
-const AccordionBody = () => {
+const AccordionBody = memo(() => {
     return (
         <ul>
             <li>1</li>
@@ -45,4 +45,4 @@ const AccordionBody = () => {
         </ul>
 
     )
-}
+})

@@ -1,9 +1,10 @@
+import {memo} from "react";
 
 export type OnOffPropsType={
     value: boolean
     onClick: (value:boolean)=>void
 }
-export const OnOff = (props: OnOffPropsType) => {
+export const OnOff = memo((props: OnOffPropsType) => {
     const {value, onClick} = props
     const blockStyle = {
         display: "flex",
@@ -43,4 +44,4 @@ export const OnOff = (props: OnOffPropsType) => {
         </div>
 
     )
-}
+})
