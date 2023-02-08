@@ -44,7 +44,7 @@ export const App = () => {
             />
             <Rating rating={ratingValue} onClick={setRatingValue}/>
 
-            <SelectComponent value={parentValue} onChange={setParenValue} items={users}/>
+            <SelectComponent value={parentValue} onChange={setParenValue} items={[{title: "", country: 0, population: 1, value: ""}]}/>
         </div>
     );
 }
