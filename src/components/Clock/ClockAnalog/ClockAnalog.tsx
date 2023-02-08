@@ -8,16 +8,17 @@ type AnalogClockPropsType = {
 
 export const ClockAnalog: React.FC<AnalogClockPropsType> = (props)=> {
     const seconds = props.date.getSeconds();
-    const secondsDegrees = ((seconds / 60) * 360) + 90;
+    // const secondsDegrees = ((seconds / 60) * 360) + 90;
+    const secondsDegrees = (seconds * 6)+90;
     const secondHandTransform = {transform :`rotate(${secondsDegrees}deg)`};
 
     const mins = props.date.getMinutes();
-    const minutesDegrees = ((mins / 60) * 360) + 90;
+    const minutesDegrees = (mins* 6)+90;
     const minHandTransform = {transform :`rotate(${minutesDegrees}deg)`};
 
 
     const hours = props.date.getHours();
-    const hoursDegrees = ((hours / 12) * 360) + 90;
+    const hoursDegrees = (hours * 30)+90;
     const hourHandTransform = {transform :`rotate(${hoursDegrees}deg)`};
 
     return (
